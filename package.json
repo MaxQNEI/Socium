@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "ThreeJS + Webpack",
   "main": "src/entry.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "three": "^0.117.1",
     "webpack": "^4.43.0",
@@ -12,7 +14,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "server": "nodemon express/index.js"
   },
   "keywords": [
     "threejs",
