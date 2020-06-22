@@ -1,0 +1,23 @@
+{
+  "name": "fbgame",
+  "version": "1.0.0",
+  "description": "ThreeJS + Webpack",
+  "main": "src/entry.js",
+  "dependencies": {},
+  "devDependencies": {
+    "three": "^0.117.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "keywords": [
+    "threejs",
+    "webpack"
+  ],
+  "author": "MaxQNEI <maxqnei@gmail.com>",
+  "license": "ISC"
+}
