@@ -6,6 +6,7 @@
 
 # Step-By-Step
 * `npm i webpack@latest webpack-cli@latest --save-dev`
+* `npm i three@latest --save-dev`
 * `npm i express@latest --save`
 
 
