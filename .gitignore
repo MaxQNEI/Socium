@@ -4,3 +4,7 @@
 
 # Configs
 /config.local.js
+
+# Bundle (build)
+/public/bundle.js
+/public/assets/

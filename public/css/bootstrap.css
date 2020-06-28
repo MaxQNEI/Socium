@@ -1,6 +1,6 @@
 @charset "utf-8";
 
- @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap');
 
 * {
   margin: 0;
@@ -13,16 +13,7 @@ html, body {
   height: 100%;
   background-color: #111111;
   color: #ffffff;
-  overflow: none;
   cursor: default;
-}
-
-.app {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  justify-content: center;
-  align-items: center;
 }
 
 img {
@@ -45,7 +36,10 @@ a, a:hover, a:focus {
   outline: none;
 }
 
-
-.dev {
-  color: #ff9977;
+.app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
