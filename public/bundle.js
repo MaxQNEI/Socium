@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"@charset \\\"utf-8\\\";\\n\\n.root-wrap {\\n  overflow: hidden;\\n}\\n\\n.root-canvas {\\n  width: 100%;\\n  height: 100%;\\n  opacity: 0;\\n\\n  transition: opacity 1000ms linear 500ms;\\n}\\n\\n.root-wrap.show-canvas .root-canvas {\\n  opacity: 1;\\n}\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./src/css/index.css?./node_modules/css-loader/dist/cjs.js");
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"@charset \\\"utf-8\\\";\\n\\n.root-wrap {\\n  overflow: hidden;\\n}\\n\\n.root-canvas {\\n  width: 100%;\\n  height: 100%;\\n}\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./src/css/index.css?./node_modules/css-loader/dist/cjs.js");
 
 /***/ }),
 
@@ -106,61 +106,6 @@ eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../.
 
 "use strict";
 eval("\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\n// eslint-disable-next-line func-names\nmodule.exports = function (useSourceMap) {\n  var list = []; // return the list of modules as css string\n\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = cssWithMappingToString(item, useSourceMap);\n\n      if (item[2]) {\n        return \"@media \".concat(item[2], \" {\").concat(content, \"}\");\n      }\n\n      return content;\n    }).join('');\n  }; // import a list of modules into the list\n  // eslint-disable-next-line func-names\n\n\n  list.i = function (modules, mediaQuery, dedupe) {\n    if (typeof modules === 'string') {\n      // eslint-disable-next-line no-param-reassign\n      modules = [[null, modules, '']];\n    }\n\n    var alreadyImportedModules = {};\n\n    if (dedupe) {\n      for (var i = 0; i < this.length; i++) {\n        // eslint-disable-next-line prefer-destructuring\n        var id = this[i][0];\n\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n\n    for (var _i = 0; _i < modules.length; _i++) {\n      var item = [].concat(modules[_i]);\n\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        // eslint-disable-next-line no-continue\n        continue;\n      }\n\n      if (mediaQuery) {\n        if (!item[2]) {\n          item[2] = mediaQuery;\n        } else {\n          item[2] = \"\".concat(mediaQuery, \" and \").concat(item[2]);\n        }\n      }\n\n      list.push(item);\n    }\n  };\n\n  return list;\n};\n\nfunction cssWithMappingToString(item, useSourceMap) {\n  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring\n\n  var cssMapping = item[3];\n\n  if (!cssMapping) {\n    return content;\n  }\n\n  if (useSourceMap && typeof btoa === 'function') {\n    var sourceMapping = toComment(cssMapping);\n    var sourceURLs = cssMapping.sources.map(function (source) {\n      return \"/*# sourceURL=\".concat(cssMapping.sourceRoot || '').concat(source, \" */\");\n    });\n    return [content].concat(sourceURLs).concat([sourceMapping]).join('\\n');\n  }\n\n  return [content].join('\\n');\n} // Adapted from convert-source-map (MIT)\n\n\nfunction toComment(sourceMap) {\n  // eslint-disable-next-line no-undef\n  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));\n  var data = \"sourceMappingURL=data:application/json;charset=utf-8;base64,\".concat(base64);\n  return \"/*# \".concat(data, \" */\");\n}\n\n//# sourceURL=webpack:///./node_modules/css-loader/dist/runtime/api.js?");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/lib/HTMLElement.addClass.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/lib/HTMLElement.addClass.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = \"(() => {\\n  Object.defineProperties(HTMLElement.prototype, {\\n    addClass: { enumerable: true, value: function addClass(className) {\\n      className.split(' ').some((className) => {\\n        className && this.classList.add(className);\\n      });\\n\\n      return this;\\n    } },\\n  });\\n})();\\n\"\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.addClass.js?./node_modules/raw-loader");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/lib/HTMLElement.append.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/lib/HTMLElement.append.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = \"(() => {\\n  Object.defineProperties(HTMLElement.prototype, {\\n    append: { enumerable: true, value: function append(...elements) {\\n      elements.some((element) => {\\n        this.appendChild(element);\\n      })\\n\\n      return this;\\n    } },\\n  });\\n})();\\n\"\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.append.js?./node_modules/raw-loader");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/lib/HTMLElement.remClass.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/lib/HTMLElement.remClass.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = \"(() => {\\n  Object.defineProperties(HTMLElement.prototype, {\\n    remClass: { enumerable: true, value: function remClass(className) {\\n      if(className === '*') {\\n        Object.values(document.body.classList).some((className) => {\\n          this.classList.remove(className);\\n        });\\n\\n        return this;\\n      }\\n\\n      className.split(' ').some((className) => {\\n        this.classList.remove(className);\\n      });\\n\\n      return this;\\n    } },\\n  });\\n})();\\n\"\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.remClass.js?./node_modules/raw-loader");
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/lib/HTMLElement.setClass.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/lib/HTMLElement.setClass.js ***!
-  \*******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = \"(() => {\\n  Object.defineProperties(HTMLElement.prototype, {\\n    setClass: { enumerable: true, value: function setClass(className) {\\n      Object.values(this.classList).some((className) => {\\n        this.classList.remove(className);\\n      });\\n\\n      className.split(' ').some((className) => {\\n        className && this.classList.add(className);\\n      });\\n\\n      return this;\\n    } },\\n  });\\n})();\\n\"\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.setClass.js?./node_modules/raw-loader");
-
-/***/ }),
-
-/***/ "./node_modules/script-loader/addScript.js":
-/*!*************************************************!*\
-  !*** ./node_modules/script-loader/addScript.js ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\nmodule.exports = function(src) {\n\tfunction log(error) {\n\t\t(typeof console !== \"undefined\")\n\t\t&& (console.error || console.log)(\"[Script Loader]\", error);\n\t}\n\n\t// Check for IE =< 8\n\tfunction isIE() {\n\t\treturn typeof attachEvent !== \"undefined\" && typeof addEventListener === \"undefined\";\n\t}\n\n\ttry {\n\t\tif (typeof execScript !== \"undefined\" && isIE()) {\n\t\t\texecScript(src);\n\t\t} else if (typeof eval !== \"undefined\") {\n\t\t\teval.call(null, src);\n\t\t} else {\n\t\t\tlog(\"EvalError: No eval function available\");\n\t\t}\n\t} catch (error) {\n\t\tlog(error);\n\t}\n}\n\n\n//# sourceURL=webpack:///./node_modules/script-loader/addScript.js?");
 
 /***/ }),
 
@@ -196,19 +141,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return App; });\n/* harmony import */ var _core_Core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/Core.js */ \"./src/core/Core.js\");\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function\"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }\n\nfunction _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }\n\nfunction _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }\n\nfunction _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === \"object\" || typeof call === \"function\")) { return call; } return _assertThisInitialized(self); }\n\nfunction _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return self; }\n\nfunction _isNativeReflectConstruct() { if (typeof Reflect === \"undefined\" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === \"function\") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }\n\nfunction _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }\n\n\n\nvar App = /*#__PURE__*/function (_Core) {\n  _inherits(App, _Core);\n\n  var _super = _createSuper(App);\n\n  function App() {\n    var _this;\n\n    _classCallCheck(this, App);\n\n    _this = _super.call(this);\n\n    _this.OnDOMReady(_this.Init);\n\n    return _this;\n  }\n\n  _createClass(App, [{\n    key: \"Init\",\n    value: function Init() {\n      this.InitRootCanvas();\n    }\n  }]);\n\n  return App;\n}(_core_Core_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n\n\n//# sourceURL=webpack:///./src/App.js?");
-
-/***/ }),
-
-/***/ "./src/core/Core.js":
-/*!**************************!*\
-  !*** ./src/core/Core.js ***!
-  \**************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Core; });\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/index.css */ \"./src/css/index.css\");\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_index_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _lib_HTMLElement_addClass_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/HTMLElement.addClass.js */ \"./src/lib/HTMLElement.addClass.js\");\n/* harmony import */ var _lib_HTMLElement_addClass_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_lib_HTMLElement_addClass_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _lib_HTMLElement_append_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/HTMLElement.append.js */ \"./src/lib/HTMLElement.append.js\");\n/* harmony import */ var _lib_HTMLElement_append_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_lib_HTMLElement_append_js__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _lib_HTMLElement_remClass_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/HTMLElement.remClass.js */ \"./src/lib/HTMLElement.remClass.js\");\n/* harmony import */ var _lib_HTMLElement_remClass_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_lib_HTMLElement_remClass_js__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _lib_HTMLElement_setClass_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../lib/HTMLElement.setClass.js */ \"./src/lib/HTMLElement.setClass.js\");\n/* harmony import */ var _lib_HTMLElement_setClass_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_lib_HTMLElement_setClass_js__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\n\n\n\n\nvar Core = /*#__PURE__*/function () {\n  function Core() {\n    _classCallCheck(this, Core);\n  }\n\n  _createClass(Core, [{\n    key: \"OnDOMReady\",\n    value: function OnDOMReady(listener) {\n      window.addEventListener('DOMContentLoaded', listener.bind(this));\n    }\n  }, {\n    key: \"InitRootCanvas\",\n    value: function InitRootCanvas() {\n      var parameters = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n      var Renderer = new three__WEBPACK_IMPORTED_MODULE_5__[\"WebGLRenderer\"](parameters);\n      var Canvas = Renderer.domElement;\n      Renderer.setSize(this.Width(), this.Height());\n      document.body.setClass('root-wrap').append(Canvas.setClass('root-canvas'));\n      setTimeout(function () {\n        document.body.addClass('show-canvas');\n      }, 1000);\n      return this;\n    }\n  }, {\n    key: \"Aspect\",\n    value: function Aspect() {\n      return this.Width() / this.Height();\n    }\n  }, {\n    key: \"Width\",\n    value: function Width() {\n      return window.innerWidth;\n    }\n  }, {\n    key: \"Height\",\n    value: function Height() {\n      return window.innerHeight;\n    }\n  }]);\n\n  return Core;\n}();\n\n\n\n//# sourceURL=webpack:///./src/core/Core.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return App; });\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/index.css */ \"./src/css/index.css\");\n/* harmony import */ var _css_index_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_index_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n // import RendererController from './core/controllers/Renderer.js';\n// import CameraController from './core/controllers/Camera.js';\n// import SceneController from './core/controllers/Scene.js';\n\n\n\nvar App = /*#__PURE__*/function () {\n  function App() {\n    var _this = this;\n\n    _classCallCheck(this, App);\n\n    _defineProperty(this, \"Renderer\", void 0);\n\n    _defineProperty(this, \"Canvas\", void 0);\n\n    _defineProperty(this, \"Scene\", void 0);\n\n    _defineProperty(this, \"Camera\", void 0);\n\n    // LockEvents\n    window.addEventListener('selectstart', this.LockEvent);\n    window.addEventListener('contextmenu', this.LockEvent); // Mainstream\n\n    this.Renderer = new three__WEBPACK_IMPORTED_MODULE_1__[\"WebGLRenderer\"]({\n      antialias: true\n    });\n    this.Canvas = this.Renderer.domElement;\n    this.Scene = new three__WEBPACK_IMPORTED_MODULE_1__[\"Scene\"]();\n    this.Camera = new three__WEBPACK_IMPORTED_MODULE_1__[\"PerspectiveCamera\"](75, this.Aspect(), .1, 1000);\n    this.Renderer.setPixelRatio(window.devicePixelRatio);\n    this.Renderer.setSize(this.Width(), this.Height());\n    this.Renderer.outputEncoding = three__WEBPACK_IMPORTED_MODULE_1__[\"sRGBEncoding\"];\n    this.Renderer.shadowMap.enabled = true;\n    this.Canvas.classList.add('root-canvas');\n    window.addEventListener('resize', function (evt) {\n      _this.Renderer.setSize(_this.Width(), _this.Height());\n\n      _this.Camera.aspect = _this.Aspect();\n\n      _this.Camera.updateProjectionMatrix();\n    });\n    document.body.classList.add('root-wrap');\n    document.body.appendChild(this.Canvas);\n    this.Render(); // Scenario\n\n    var CubeSize = 5;\n    var CubeMesh = new three__WEBPACK_IMPORTED_MODULE_1__[\"Mesh\"](new three__WEBPACK_IMPORTED_MODULE_1__[\"BoxGeometry\"](CubeSize, CubeSize, CubeSize), new three__WEBPACK_IMPORTED_MODULE_1__[\"MeshBasicMaterial\"]({\n      color: 'tomato'\n    }));\n    this.Camera.position.z = 10;\n    this.Scene.add(CubeMesh);\n  } // Base.js\n\n\n  _createClass(App, [{\n    key: \"Aspect\",\n    value: function Aspect() {\n      return this.Width() / this.Height();\n    }\n  }, {\n    key: \"Width\",\n    value: function Width() {\n      return window.innerWidth;\n    }\n  }, {\n    key: \"Height\",\n    value: function Height() {\n      return window.innerHeight;\n    }\n  }, {\n    key: \"Render\",\n    value: function Render() {\n      var timestamp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document.timeline.currentTime;\n      window.requestAnimationFrame(this.Render.bind(this));\n      this.Renderer.render(this.Scene, this.Camera);\n    } // Additionals\n\n  }, {\n    key: \"LockEvent\",\n    value: function LockEvent(evt) {\n      evt.preventDefault();\n    }\n  }]);\n\n  return App;\n}();\n\n\n\n//# sourceURL=webpack:///./src/App.js?");
 
 /***/ }),
 
@@ -232,50 +165,6 @@ eval("var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/run
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.js */ \"./src/App.js\");\n\nnew _App_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n\n//# sourceURL=webpack:///./src/entry.js?");
-
-/***/ }),
-
-/***/ "./src/lib/HTMLElement.addClass.js":
-/*!*****************************************!*\
-  !*** ./src/lib/HTMLElement.addClass.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! !./node_modules/script-loader/addScript.js */ \"./node_modules/script-loader/addScript.js\")(__webpack_require__(/*! !./node_modules/raw-loader!./src/lib/HTMLElement.addClass.js */ \"./node_modules/raw-loader/index.js!./src/lib/HTMLElement.addClass.js\"));\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.addClass.js?");
-
-/***/ }),
-
-/***/ "./src/lib/HTMLElement.append.js":
-/*!***************************************!*\
-  !*** ./src/lib/HTMLElement.append.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! !./node_modules/script-loader/addScript.js */ \"./node_modules/script-loader/addScript.js\")(__webpack_require__(/*! !./node_modules/raw-loader!./src/lib/HTMLElement.append.js */ \"./node_modules/raw-loader/index.js!./src/lib/HTMLElement.append.js\"));\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.append.js?");
-
-/***/ }),
-
-/***/ "./src/lib/HTMLElement.remClass.js":
-/*!*****************************************!*\
-  !*** ./src/lib/HTMLElement.remClass.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! !./node_modules/script-loader/addScript.js */ \"./node_modules/script-loader/addScript.js\")(__webpack_require__(/*! !./node_modules/raw-loader!./src/lib/HTMLElement.remClass.js */ \"./node_modules/raw-loader/index.js!./src/lib/HTMLElement.remClass.js\"));\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.remClass.js?");
-
-/***/ }),
-
-/***/ "./src/lib/HTMLElement.setClass.js":
-/*!*****************************************!*\
-  !*** ./src/lib/HTMLElement.setClass.js ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("__webpack_require__(/*! !./node_modules/script-loader/addScript.js */ \"./node_modules/script-loader/addScript.js\")(__webpack_require__(/*! !./node_modules/raw-loader!./src/lib/HTMLElement.setClass.js */ \"./node_modules/raw-loader/index.js!./src/lib/HTMLElement.setClass.js\"));\n\n//# sourceURL=webpack:///./src/lib/HTMLElement.setClass.js?");
 
 /***/ })
 
