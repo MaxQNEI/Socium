@@ -52,6 +52,14 @@ export default class App {
     this.Camera.position.z = 10;
 
     this.Scene.add(CubeMesh);
+
+
+    (this.Scene.AnimationList = (this.Scene.AnimationList = []))
+      .push((timestamp) => {
+        CubeMesh.rotation.x = (timestamp / 3e3);
+        CubeMesh.rotation.y = (timestamp / 1e3);
+      })
+    ;
   }
 
   // Base.js
@@ -69,6 +77,17 @@ export default class App {
 
   Render(timestamp = document.timeline.currentTime) {
     window.requestAnimationFrame(this.Render.bind(this));
+
+    if(this.Scene.AnimationList) {
+      this.Scene.AnimationList = this.Scene.AnimationList.filter((handle) => {
+        if(handle(timestamp) === 'complete') {
+          return false;
+        }
+
+        return true;
+      });
+    }
+
     this.Renderer.render(this.Scene, this.Camera);
   }
 

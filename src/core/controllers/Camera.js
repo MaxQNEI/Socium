@@ -8,8 +8,6 @@ import {
 } from 'three';
 
 export default class CameraController extends BaseController {
-  AnimationList = [];
-
   constructor(type, parameters) {
     super();
   }
