@@ -6,6 +6,9 @@ import SceneController from './core/controllers/Scene.js';
 
 import * as THREE from 'three';
 
+const ENABLED = true;
+const DISABLED = false;
+
 export default class App {
   Renderer;
   Canvas;
@@ -50,12 +53,12 @@ export default class App {
 
     // ―――― BuildGrid ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
     const BuildGridMesh = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(100, 100, 10, 10),
+      new THREE.PlaneBufferGeometry(10000, 10000, 1, 1),
       new THREE.MeshBasicMaterial({
         color: '#ffffff',
         // wireframe: true,
         transparent: true,
-        opacity: .2,
+        opacity: .1,
       }),
     );
     BuildGridMesh.rotation.x = -(Math.PI / 2);
@@ -76,7 +79,7 @@ export default class App {
 
     this.Camera.position.z = 10;
 
-    this.Scene.add(CubeMesh);
+    // this.Scene.add(CubeMesh);
 
     this.ZeroPosition = new THREE.Vector3(0, 0, 0);
 
@@ -86,26 +89,37 @@ export default class App {
         this.Camera.lookAt(this.ZeroPosition);
 
     // Need create extented scene object (project)
-    // (this.Scene.AnimationList = (this.Scene.AnimationList || []))
-    //   .push((timestamp) => {
-    //     this.Camera.position.y = (Math.sin(timestamp / 5e3) + 50);
-    //     this.Camera.position.x = (Math.cos(timestamp / 2e3) * 50);
-    //     this.Camera.position.z = (Math.sin(timestamp / 2e3) * 50);
-    //     // this.Camera.rotation.x = (timestamp / 3e3);
-    //     // this.Camera.rotation.y = (timestamp / 1e3);
-    //     this.Camera.lookAt(this.ZeroPosition);
-    //   })
-    // ;
+    DISABLED && (this.Scene.AnimationList = (this.Scene.AnimationList || []))
+      .push((timestamp) => {
+        this.Camera.position.y = (Math.sin(timestamp / 5e3) + 50);
+        this.Camera.position.x = (Math.cos(timestamp / 2e3) * 50);
+        this.Camera.position.z = (Math.sin(timestamp / 2e3) * 50);
+        // this.Camera.rotation.x = (timestamp / 3e3);
+        // this.Camera.rotation.y = (timestamp / 1e3);
+        this.Camera.lookAt(this.ZeroPosition);
+      })
+    ;
     // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
 
 
     // ―――― "Building" ―――――――――――――――――――――――――――――――――――――――――――――――――――――― //
-    const BuildPointer = new THREE.Mesh(
-      new THREE.CylinderBufferGeometry(0.1, 0.1, 20, 20),
-      new THREE.MeshBasicMaterial({ color: 'red' })
+    var MouseDown = false;
+    var AllowBuild = false;
+    var HexagoneList = {};
+
+    const BuildPointerMesh = new THREE.Mesh(
+      new THREE.CylinderBufferGeometry(5, 5, 5, 6),
+      new THREE.MeshBasicMaterial({
+        color: 'gray',
+        transparent: true,
+        opacity: .5,
+      })
     );
 
-    this.Scene.add(BuildPointer);
+    const BuildPointerWrap = new THREE.Object3D();
+    BuildPointerWrap.add(BuildPointerMesh);
+    BuildPointerMesh.position.y = 2.5;
+    this.Scene.add(BuildPointerWrap);
 
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
@@ -119,22 +133,74 @@ export default class App {
     window.addEventListener('mousemove', (event) => {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+
+
+      var key = (hX +'x'+ hZ);
+      if(!AllowBuild) {
+        console.debug(`Woops! Build not allow!`);
+        return;
+      }
+
+      if(!MouseDown) {
+        console.debug(`Mouse is't down!`);
+        return;
+      }
+
+      if(key in HexagoneList) {
+        console.debug(`Hexagone on ${key} exists!`);
+        return;
+      }
+
+
+
+      const HexagoneMesh = new THREE.Mesh(
+        new THREE.CylinderBufferGeometry(5, 5, 5, 6),
+        new THREE.MeshBasicMaterial({ color: 'gray' })
+      );
+
+      const HexagoneWrap = new THREE.Object3D();
+      HexagoneWrap.add(HexagoneMesh);
+      HexagoneMesh.position.y = 2.5;
+
+      HexagoneWrap.position.set(hX, 0, hZ);
+      HexagoneWrap.children[0].material.color = new THREE.Color('green');
+
+      HexagoneList[key] = HexagoneWrap;
+
+      this.Scene.add(HexagoneWrap);
+    });
+
+    var hX, hZ;
+    window.addEventListener('mousedown', (event) => {
+      MouseDown = true;
+
+      window.dispatchEvent(new Event('mousemove', event));
+    });
+
+    window.addEventListener('mouseup', (event) => {
+      MouseDown = false;
     });
 
     // Need create extented scene object (project)
+    const GridSize = 10;
     (this.Scene.AnimationList = (this.Scene.AnimationList || []))
       .push((timestamp) => {
         raycaster.setFromCamera(mouse, this.Camera);
         intersects = raycaster.intersectObject(BuildGridWrap, true);
 
-        (intersects && intersects[0]) && (() => {
+        if(intersects && intersects[0]) {
           var { x, y, z } = intersects[0].point;
 
-          x = Math.round(x);
-          z = Math.round(z);
+          hX = Math.round(x / GridSize) * GridSize;
+          hZ = Math.round(z / GridSize) * GridSize;
 
-          BuildPointer.position.set(x, y, z);
-        })();
+          AllowBuild = true;
+
+          BuildPointerWrap.position.set(hX, y, hZ);
+        } else {
+          AllowBuild = false;
+        }
       })
     ;
     // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
