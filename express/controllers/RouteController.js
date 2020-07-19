@@ -53,11 +53,16 @@ class RouteController extends CoreController {
   }
 
   Handle(req, res, next) {
-    const parsedUrl = req.originalUrl.replace(/(^\/+|\/+$)/g, '').toLowerCase().split('/');
+    this.LogRequest(req);
+
+    const parsedUrl = req.originalUrl.replace(/(^\/+|\/+$|\?.*?$)/g, '').toLowerCase().split('/');
 
     const controller = (parsedUrl[0] || 'index');
     const action = 'action'+ this.MtdName(parsedUrl[1] || 'index');
     const params = (parsedUrl.slice(2) || []);
+
+    // Facebook auth
+    // console.debug('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n', req.body, req.params);
 
     if(this.Controllers[controller] === undefined) {
       console.warn(`Controller «${controller}» is ${this.Controllers[controller]}!`);
@@ -68,7 +73,7 @@ class RouteController extends CoreController {
     const Controller = new this.Controllers[controller];
 
     if(!(action in Controller)) {
-      console.warn(`Actions «${controller}.${action}» is ${Controllers[action]}!`);
+      console.warn(`Actions «${controller}.${action}» is ${Controller[action]}!`);
       res.status(404);
       return res.send(this.Error());
     }

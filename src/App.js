@@ -2,7 +2,7 @@ import './css/index.css';
 
 // import RendererController from './core/controllers/Renderer.js';
 // import CameraController from './core/controllers/Camera.js';
-// import SceneController from './core/controllers/Scene.js';
+import SceneController from './core/controllers/Scene.js';
 
 import * as THREE from 'three';
 
@@ -17,7 +17,7 @@ export default class App {
     window.addEventListener('selectstart', this.LockEvent);
     window.addEventListener('contextmenu', this.LockEvent);
 
-    // Mainstream
+    // Base
     this.Renderer = new THREE.WebGLRenderer({ antialias: true });
     this.Canvas = this.Renderer.domElement;
     this.Scene = new THREE.Scene;
@@ -25,7 +25,8 @@ export default class App {
 
     this.Renderer.setPixelRatio(window.devicePixelRatio);
     this.Renderer.setSize(this.Width(), this.Height());
-    this.Renderer.outputEncoding = THREE.sRGBEncoding;
+    this.Renderer.setClearColor(0x000000, 1);
+    // this.Renderer.outputEncoding = THREE.sRGBEncoding;
     this.Renderer.shadowMap.enabled = true;
 
     this.Canvas.classList.add('root-canvas');
@@ -40,9 +41,30 @@ export default class App {
     document.body.classList.add('root-wrap');
     document.body.appendChild(this.Canvas);
 
+    this.Scenario();
     this.Render();
+  }
 
-    // Scenario
+  Scenario() {
+    this.Scene.fog = new THREE.Fog(0x000000, 100, 500);
+
+    // ―――― Plane ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
+    const PlaneMesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(1000, 1000, 100, 100),
+      new THREE.MeshBasicMaterial({
+        color: '#ffffff',
+        wireframe: true,
+      }),
+    );
+    PlaneMesh.rotation.x = -(Math.PI / 2);
+
+    const PlaneWrap = new THREE.Object3D;
+    PlaneWrap.add(PlaneMesh);
+
+    this.Scene.add(PlaneWrap);
+    // ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
+
+
     const CubeSize = 5;
     const CubeMesh = new THREE.Mesh(
       new THREE.BoxGeometry(CubeSize, CubeSize, CubeSize),
@@ -54,10 +76,16 @@ export default class App {
     this.Scene.add(CubeMesh);
 
 
+    this.ZeroPosition = new THREE.Vector3(0, 0, 0);
+
     (this.Scene.AnimationList = (this.Scene.AnimationList = []))
       .push((timestamp) => {
-        CubeMesh.rotation.x = (timestamp / 3e3);
-        CubeMesh.rotation.y = (timestamp / 1e3);
+        this.Camera.position.y = (Math.sin(timestamp / 5e3) + 50);
+        this.Camera.position.x = (Math.cos(timestamp / 2e3) * 50);
+        this.Camera.position.z = (Math.sin(timestamp / 2e3) * 50);
+        // this.Camera.rotation.x = (timestamp / 3e3);
+        // this.Camera.rotation.y = (timestamp / 1e3);
+        this.Camera.lookAt(this.ZeroPosition);
       })
     ;
   }

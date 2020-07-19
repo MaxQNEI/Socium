@@ -2,12 +2,13 @@ require('./init.js');
 
 const Route = require('./controllers/RouteController.js');
 
-const Express = require('express')
+const Express = require('express');
+const BodyParser = require('body-parser');
 const Server = Express();
 
-// Server.use(Express.static(Config.Public));
-Server.use(Express.json());
-Server.use(Express.urlencoded({ extended: true }));
+Server.use(Express.static(Config.Public));
+Server.use(BodyParser.json({ strict: false }));
+Server.use(BodyParser.urlencoded({ extended: true }));
 
 Server.listen(Config.WebPort, () => {
   console.debug(`Express start at port: ${Config.WebPort}.`);
