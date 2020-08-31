@@ -7,6 +7,7 @@ import * as THREE from 'three';
 // import SceneController from './core/controllers/Scene.js';
 
 // import InitialScenario from './app/scenarios/0000-initial-scenario.js';
+import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
 
 const ENABLED = true;
 const DISABLED = false;
@@ -17,7 +18,7 @@ export default class App {
   Scene;
   Camera;
 
-  DebugBlock;
+  Scenario;
 
   constructor() {
     // LockEvents
@@ -30,7 +31,10 @@ export default class App {
     this.Scene = new THREE.Scene;
     this.Camera = new THREE.PerspectiveCamera(75, this.Aspect(), .1, 1000);
 
+    this.Scene.AnimationList = [];
+
     this.Renderer.setPixelRatio(window.devicePixelRatio);
+    this.Renderer.setPixelRatio(.5);
     this.Renderer.setSize(this.Width(), this.Height());
     this.Renderer.setClearColor(0x000000, 1);
     // this.Renderer.outputEncoding = THREE.sRGBEncoding;
@@ -48,38 +52,13 @@ export default class App {
     document.body.classList.add('root-wrap');
     document.body.appendChild(this.Canvas);
 
-    // this.InitDebugBlock();
     this.Render();
 
-    // InitialScenario({
-    //   Scene: this.Scene,
-    //   Camera: this.Camera,
-    // });
+    this.Scenario = new NewHorizonScenario({
+      Scene: this.Scene,
+      Camera: this.Camera,
+    });
   }
-
-  // InitDebugBlock() {
-  //   this.DebugBlock = document.createElement('div');
-  //   Object.assign(this.DebugBlock.style, {
-  //     position: 'fixed',
-  //     zIndex: 10000,
-  //     top: '10px',
-  //     right: '10px',
-  //     minWidth: '200px',
-  //     minHeight: '5px',
-  //     padding: '5px',
-  //     backgroundColor: 'rgba(255, 255, 255, .85)',
-  //     color: '#222222',
-  //   });
-  //   document.body.append(this.DebugBlock);
-
-  //   Object.defineProperties(this.DebugBlock, {
-  //     add: { enumerable: true, value: function add() {
-  //       const element = document.createElement('p');
-  //       this.appendChild(element);
-  //       return element;
-  //     } }
-  //   });
-  // }
 
   // Base.js
   Aspect() {
