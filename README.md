@@ -20,8 +20,8 @@
       /socket.io.js.map
 ```
 via command's
-`ln -s ../../../node_modules/socket.io-client/dist/socket.io.js`
-`ln -s ../../../node_modules/socket.io-client/dist/socket.io.js.map`
+* `ln -s ../../../node_modules/socket.io-client/dist/socket.io.js`
+* `ln -s ../../../node_modules/socket.io-client/dist/socket.io.js.map`
 
 
 # Reference
