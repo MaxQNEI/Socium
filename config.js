@@ -7,6 +7,7 @@ global.Config = module.exports = {
     PublicIndex: `${__dirname}/public/index.html`,
     PublicError: `${__dirname}/public/error.html`,
   Express: `${__dirname}/express`,
+  Socket: `${__dirname}/socket`,
   Src: `${__dirname}/src`,
 
   ...LocalConfig,

@@ -1,3 +1,5 @@
+'use strict';
+
 (() => {
   Object.defineProperties(HTMLElement.prototype, {
     remClass: { enumerable: true, value: function remClass(className) {

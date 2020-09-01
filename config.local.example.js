@@ -8,6 +8,9 @@
  */
 
 module.exports = {
+  WebPort: 11111,
+  SocketPort: 11112,
+
   Facebook: {
     AppSecret: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
   },

@@ -8,3 +8,7 @@
 # Bundle (build)
 /public/bundle.js
 /public/assets/
+
+# Sublime
+socium.sublime-project
+socium.sublime-workspace
