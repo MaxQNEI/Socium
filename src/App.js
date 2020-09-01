@@ -7,12 +7,13 @@ import SocketController from './core/controllers/Socket.js';
 // import CameraController from './core/controllers/Camera.js';
 // import SceneController from './core/controllers/Scene.js';
 
-// import InitialScenario from './app/scenarios/0000-initial-scenario.js';
-// import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
-
 import * as SocketActions from './app/socket/actions.js';
 
-import Scenario from './app/scenarios/0000-initial-scenario.js';
+// import InitialScenario from './app/scenarios/0000-initial-scenario.js';
+// import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
+import Scenario from
+  // './app/scenarios/0000-initial-scenario.js';
+  './app/scenarios/0001-new-horizon.js';
 
 const ENABLED = true;
 const DISABLED = false;
@@ -47,7 +48,7 @@ export default class App {
     this.Scene.AnimationList = [];
 
     this.Renderer.setPixelRatio(window.devicePixelRatio);
-    this.Renderer.setPixelRatio(.5);
+    // this.Renderer.setPixelRatio(.5);
     this.Renderer.setSize(this.Width(), this.Height());
     this.Renderer.setClearColor(0x000000, 1);
     // this.Renderer.outputEncoding = THREE.sRGBEncoding;

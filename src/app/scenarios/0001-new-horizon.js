@@ -24,20 +24,19 @@ export default class NewHorizonScenario {
   // Methods ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
   PrepareView() {
     const ZeroPoint = new THREE.Vector3(0, 0, 0);
-    this.Camera.position.set(0, 100, 50);
+    this.Camera.position.set(0, 10, 0);
     this.Camera.lookAt(ZeroPoint);
 
     this.Scene.AnimationList.push((timestamp) => {
-      this.Camera.position.x = (Math.sin(timestamp / 10000) * 50);
-      this.Camera.position.z = (Math.cos(timestamp / 7500) * 100);
-      this.Camera.lookAt(ZeroPoint);
+      this.Camera.position.x = (Math.sin(timestamp / 5000) * 20);
+      this.Camera.position.z = (Math.cos(timestamp / 5000) * 20);
+      this.Camera.rotation.y = (Math.sin(timestamp / 5000));
+      // this.Camera.lookAt(ZeroPoint);
     });
   }
 
   Generate() {
     function axis(size) {
-      console.debug('axis()', size);
-
       var o = {};
       for(var x = -size; x <= size; x++) {
         o[x] = null;
@@ -56,38 +55,11 @@ export default class NewHorizonScenario {
   Apply() {
     // console.debug('Map', this.Map);
 
-    // window.A = this.AddCell({ r: 20, h: .1, x: 0, z: 0 });
-    // window.B = this.AddCell({ r: 20, h: .1, x: 0, z: 0 });
-    // window.C = this.AddCell({ r: 20, h: .1, x: 0, z: 0 });
-    // window.D = this.AddCell({ r: 20, h: .1, x: 0, z: 0 });
-
-
-    // this.AddCell({ r: 20, h: 0, x: 0, z: -1 });
-    // this.AddCell({ r: 20, h: 0, x: 0, z: 0 });
-    // this.AddCell({ r: 20, h: 0, x: 0, z: 1 });
-    // this.AddCell({ r: 20, h: 0, x: 0, z: 2 });
-
-    // this.AddCell({ r: 20, h: 0, x: 1, z: -1 });
-    // this.AddCell({ r: 20, h: 0, x: 1, z: 0 });
-    // this.AddCell({ r: 20, h: 0, x: 1, z: 1 });
-    // this.AddCell({ r: 20, h: 0, x: 1, z: 2 });
-
-    // this.AddCell({ r: 20, h: 0, x: 2, z: -1 });
-    // this.AddCell({ r: 20, h: 0, x: 2, z: 0 });
-    // this.AddCell({ r: 20, h: 0, x: 2, z: 1 });
-    // this.AddCell({ r: 20, h: 0, x: 2, z: 2 });
-
-    // this.AddCell({ r: 20, h: 0, x: 3, z: -1 });
-    // this.AddCell({ r: 20, h: 0, x: 3, z: 0 });
-    // this.AddCell({ r: 20, h: 0, x: 3, z: 1 });
-    // this.AddCell({ r: 20, h: 0, x: 3, z: 2 });
-
-
     Object.keys(this.Map).some((x) => {
       Object.keys(this.Map).some((z) => {
         this.Map[x][z] = this.AddCell({
           r: 5,
-          h: 50,
+          h: 1,
           x: x,
           // y: Math.sin(Math.pow((x * z) / 100, 2)) * 10,
           // y: ((x * z) * Math.pow((x * z), 1.5)),
@@ -100,41 +72,42 @@ export default class NewHorizonScenario {
   Light() {
     const Light = new THREE.PointLight(0xFFFFFF, 1, 1000);
     Light.position.y = 100;
+    Light.castShadow = true;
     this.Scene.add(Light);
   }
 
   // Helpers ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
   AddCell({r, h, x, y, z} = params) {
-    const s = r * 1;
+    const s = r;
 
-    const RB = Random(100, 180);
-    const color = `rgb(${RB}, 240, ${RB})`;
+    const Rnd = Random(40, 180);
+    const Color = `rgb(${Rnd}, ${Rnd}, ${Rnd})`;
+
+    const Material = new THREE.MeshBasicMaterial({ color: Color });
+    // const Material = new THREE.MeshStandardMaterial({ color: Color });
 
     const Mesh = new THREE.Mesh(
-      new THREE.CylinderBufferGeometry(s, s, h, 6),
+      // new THREE.CylinderBufferGeometry(s, s, h, 6),
+      new THREE.CylinderGeometry(s, s, h, 6),
+      // new THREE.ConeBufferGeometry(s, s, h, 6),
+
       // new THREE.MeshBasicMaterial({ color: 0xCCCCCC, transparent: true, opacity: .95 })
       // new THREE.MeshStandardMaterial({ color: 0xCCCCCC })
       // new THREE.MeshBasicMaterial({ color: Random(0xD0D0D0, 0xDFDFDF) })
-      new THREE.MeshStandardMaterial({ color: color })
+      Material
     );
 
-    var positionUp = (r * 2);
+    Mesh.receiveShadow = true;
+    Mesh.castShadow = true;
 
-    var shiftDownX = 0;
-    var shiftUpZ = 0;
+    Mesh.scale.x += 0.155;
 
-    shiftDownX = (x * r);
-
-    if(x % 2 !== 0) {
-      // shiftDownX = r;
-      shiftUpZ = r * 1.5;
-    } else {
-      // shiftDownX = (x * r);
-    }
-
-    Mesh.position.x = ((x * positionUp) - shiftDownX);
+    Mesh.position.x = ((x * (r * 2)) - (x * r));
     Mesh.position.y = y || 0;
-    Mesh.position.z = ((z * positionUp) + shiftUpZ) + (z * r);
+    Mesh.position.z = ((z * (r * 2)) + (x % 2 !== 0 ? r * 1.5 : 0)) + (z * r);
+
+
+
 
     this.Scene.add(Mesh);
 
