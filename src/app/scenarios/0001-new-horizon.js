@@ -107,14 +107,15 @@ export default class NewHorizonScenario {
   AddCell({r, h, x, y, z} = params) {
     const s = r * 1;
 
-    const RB = Random();
-    const color =
+    const RB = Random(100, 180);
+    const color = `rgb(${RB}, 240, ${RB})`;
 
     const Mesh = new THREE.Mesh(
       new THREE.CylinderBufferGeometry(s, s, h, 6),
       // new THREE.MeshBasicMaterial({ color: 0xCCCCCC, transparent: true, opacity: .95 })
       // new THREE.MeshStandardMaterial({ color: 0xCCCCCC })
-      new THREE.MeshBasicMaterial({ color: Random(0xD0D0D0, 0xDFDFDF) })
+      // new THREE.MeshBasicMaterial({ color: Random(0xD0D0D0, 0xDFDFDF) })
+      new THREE.MeshStandardMaterial({ color: color })
     );
 
     var positionUp = (r * 2);

@@ -7,7 +7,9 @@ import * as THREE from 'three';
 // import SceneController from './core/controllers/Scene.js';
 
 // import InitialScenario from './app/scenarios/0000-initial-scenario.js';
-import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
+// import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
+
+import Scenario from './app/scenarios/0000-initial-scenario.js';
 
 const ENABLED = true;
 const DISABLED = false;
@@ -54,7 +56,7 @@ export default class App {
 
     this.Render();
 
-    this.Scenario = new NewHorizonScenario({
+    this.Scenario = new Scenario({
       Scene: this.Scene,
       Camera: this.Camera,
     });

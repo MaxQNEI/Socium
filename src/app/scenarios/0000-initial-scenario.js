@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import BuildGridModule from '../../core/modules/BuildGrid.js';
+import BuildGridModule from '../modules/BuildGrid.js';
 
 export default class InitialScenario {
   Scene;
@@ -16,22 +16,19 @@ export default class InitialScenario {
     this.Scene.add(BuildGrid);
 
     // ―――― Object to observation ――――――――――――――――――――――――――――――――――――――――――― //
-    const CubeSize = 5;
-    const CubeMesh = new THREE.Mesh(
-      new THREE.BoxGeometry(CubeSize, CubeSize, CubeSize),
-      new THREE.MeshBasicMaterial({ color: 'tomato' })
-    );
-
-    this.Camera.position.z = 10;
-
+    // const CubeSize = 5;
+    // const CubeMesh = new THREE.Mesh(
+    //   new THREE.BoxGeometry(CubeSize, CubeSize, CubeSize),
+    //   new THREE.MeshBasicMaterial({ color: 'tomato' })
+    // );
     // this.Scene.add(CubeMesh);
+
 
     this.ZeroPosition = new THREE.Vector3(0, 0, 0);
 
-        this.Camera.position.y = 150;
-        this.Camera.position.x = 0;
-        this.Camera.position.z = 20;
+        this.Camera.position.set(0, 100, 0);
         this.Camera.lookAt(this.ZeroPosition);
+
 
     // Need create extented scene object (project)
     // DISABLED && (this.Scene.AnimationList = (this.Scene.AnimationList || []))
@@ -128,7 +125,7 @@ export default class InitialScenario {
     });
 
     // Need create extented scene object (project)
-    const Observe = this.DebugBlock.add();
+    // const Observe = this.DebugBlock.add();
 
     const GridSize = 10;
     (this.Scene.AnimationList = (this.Scene.AnimationList || []))
@@ -153,15 +150,15 @@ export default class InitialScenario {
               hZ += GridSize / 2;
             }
 
-            Observe.innerHTML
-              = `<p>GridSize: ${GridSize}</p>`
-              + `<p>x: ${x}</p>`
-              + `<p>z: ${z}</p>`
-              + `<p>hX: ${hX}</p>`
-              + `<p>hZ: ${hZ}</p>`
-              + `<p>aX: ${aX}</p>`
-              + `<p>aZ: ${aZ}</p>`
-            ;
+            // Observe.innerHTML
+            //   = `<p>GridSize: ${GridSize}</p>`
+            //   + `<p>x: ${x}</p>`
+            //   + `<p>z: ${z}</p>`
+            //   + `<p>hX: ${hX}</p>`
+            //   + `<p>hZ: ${hZ}</p>`
+            //   + `<p>aX: ${aX}</p>`
+            //   + `<p>aZ: ${aZ}</p>`
+            // ;
           })();
 
           BuildPointerWrap.position.set(hX, y, hZ);
