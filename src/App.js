@@ -2,12 +2,15 @@ import './css/index.css';
 
 import * as THREE from 'three';
 
+import SocketController from './core/controllers/Socket.js';
 // import RendererController from './core/controllers/Renderer.js';
 // import CameraController from './core/controllers/Camera.js';
 // import SceneController from './core/controllers/Scene.js';
 
 // import InitialScenario from './app/scenarios/0000-initial-scenario.js';
 // import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
+
+import * as SocketActions from './app/socket/actions.js';
 
 import Scenario from './app/scenarios/0000-initial-scenario.js';
 
@@ -22,7 +25,15 @@ export default class App {
 
   Scenario;
 
+  Socket;
+
   constructor() {
+    this.Socket = new SocketController;
+
+    Object.keys(SocketActions).some((actionName) => {
+      this.Socket.SetAction(actionName, SocketActions[actionName]);
+    });
+
     // LockEvents
     window.addEventListener('selectstart', this.LockEvent);
     window.addEventListener('contextmenu', this.LockEvent);

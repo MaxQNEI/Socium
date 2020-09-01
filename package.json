@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "script-loader": "^0.7.2",
+    "socket.io": "^2.3.0",
     "style-loader": "^1.2.1"
   },
   "devDependencies": {
@@ -24,7 +25,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch",
-    "server": "nodemon express/index.js"
+    "express": "nodemon express/index.js",
+    "socket": "nodemon socket/index.js"
   },
   "keywords": [
     "threejs",

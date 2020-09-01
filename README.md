@@ -8,7 +8,20 @@
 * `npm i webpack@latest webpack-cli@latest --save-dev`
 * `npm i three@latest --save-dev`
 * `npm i express@latest --save`
+* `npm i socket.io@latest --save`
 
+
+## Create socket js files assets as symbolic link
+`
+/public
+  /assets
+    /js
+      /socket.io.js
+      /socket.io.js.map
+`
+via command's
+`ln -s ../../../node_modules/socket.io-client/dist/socket.io.js`
+`ln -s ../../../node_modules/socket.io-client/dist/socket.io.js.map`
 
 
 # Reference

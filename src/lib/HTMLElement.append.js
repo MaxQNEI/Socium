@@ -1,3 +1,5 @@
+'use strict';
+
 (() => {
   Object.defineProperties(HTMLElement.prototype, {
     append: { enumerable: true, value: function append(...elements) {
