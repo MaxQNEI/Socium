@@ -12,13 +12,13 @@
 
 
 ## Create socket js files assets as symbolic link
-`
+```
 /public
   /assets
     /js
       /socket.io.js
       /socket.io.js.map
-`
+```
 via command's
 `ln -s ../../../node_modules/socket.io-client/dist/socket.io.js`
 `ln -s ../../../node_modules/socket.io-client/dist/socket.io.js.map`
@@ -28,15 +28,17 @@ via command's
 
 # Server
 Global "Variables" defines in:
-`
+```
 /express
   /config.js
   /init.js
-`
+```
 
 ## Init.js defines «Core» controllers/modules/etc...
+```
 /core
   /...
+```
 
 
 ## Common OWNER Config file is «/config.local.js»

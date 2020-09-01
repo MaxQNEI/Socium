@@ -2,7 +2,7 @@ Terms:
 Core = Framework - created by MaxQNEI
 App - target application contains in src
 
-`
+```
 /
   express/            - express-server Core engine
     controllers/      - controllers of routes -> actions of express
@@ -24,4 +24,4 @@ App - target application contains in src
       helpers/        - [n/d]
     css/              - [n/d]
     lib/              - js-library (non modules - as external library)
-`
+```
