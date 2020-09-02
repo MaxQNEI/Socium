@@ -46,6 +46,7 @@ export default class App {
     this.Camera = new THREE.PerspectiveCamera(75, this.Aspect(), .1, 1000);
 
     this.Scene.AnimationList = [];
+    this.Scene.OnRender = [];
 
     this.Renderer.setPixelRatio(window.devicePixelRatio);
     // this.Renderer.setPixelRatio(.5);
@@ -92,6 +93,16 @@ export default class App {
 
     if(this.Scene.AnimationList) {
       this.Scene.AnimationList = this.Scene.AnimationList.filter((handle) => {
+        if(handle(timestamp) === 'complete') {
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    if(this.Scene.OnRender) {
+      this.Scene.OnRender = this.Scene.OnRender.filter((handle) => {
         if(handle(timestamp) === 'complete') {
           return false;
         }

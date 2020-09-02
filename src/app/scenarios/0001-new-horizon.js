@@ -12,27 +12,88 @@ export default class NewHorizonScenario {
     this.Camera = Parameters.Camera;
     this.Scene = Parameters.Scene;
 
-    this.Scene.fog = new THREE.Fog(0x000000, 100, 500);
+    this.Scene.fog = new THREE.Fog(0x000000, 0, 500);
 
-    this.PrepareView();
-    this.Generate();
-    this.Apply();
+    this.AddStats();
 
     this.Light();
+    this.PrepareView();
+
+    // this.Generate();
+    // this.Apply();
   }
 
-  // Methods ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
+  AddStats() {
+    var div = document.createElement('div');
+
+    Object.assign(div.style, {
+      display: 'none',
+
+      position: 'fixed',
+      top: '10px',
+      right: '10px',
+      zIndex: 10000,
+      minWidth: '100px',
+      minHeight: '1px',
+      padding: '10px',
+      backgroundColor: 'rgba(255, 255, 255, .75)',
+      color: '#222222',
+    });
+
+    document.body.appendChild(div);
+
+    this.Stats = div;
+
+    this.Stats.CameraPosition = document.createElement('h2');
+    this.Stats.appendChild(this.Stats.CameraPosition);
+
+    this.Stats.GroundSize = document.createElement('h2');
+    this.Stats.appendChild(this.Stats.GroundSize);
+  }
+
   PrepareView() {
     const ZeroPoint = new THREE.Vector3(0, 0, 0);
-    this.Camera.position.set(0, 10, 0);
-    this.Camera.lookAt(ZeroPoint);
+    this.Camera.position.set(0, 100, 0);
+    this.Camera.rotation.x = -(Math.PI / 4);
 
     this.Scene.AnimationList.push((timestamp) => {
-      this.Camera.position.x = (Math.sin(timestamp / 5000) * 20);
-      this.Camera.position.z = (Math.cos(timestamp / 5000) * 20);
-      this.Camera.rotation.y = (Math.sin(timestamp / 5000));
-      // this.Camera.lookAt(ZeroPoint);
+      this.Camera.position.z -= .5;
     });
+
+
+    const op = { x: null, z: null };
+    this.Scene.OnRender.push((timestamp) => {
+      let x = Math.round(this.Camera.position.x);
+      let z = Math.round(this.Camera.position.z);
+
+      this.Stats.CameraPosition.innerHTML = `${x} x ${z}<br>${op.x} x ${op.z}`;
+
+      if(op.x !== x || op.z !== z) {
+        this.UpdGround();
+
+        op.x = x;
+        op.z = z;
+      }
+    });
+  }
+
+  UpdGround(X = Math.round(this.Camera.position.x), Z = Math.round(this.Camera.position.z)) {
+    var FromX = 30;
+    var FromZ = 20;
+
+    for(var x = X-FromX; x < X+FromX; x++) {
+      this.Map[x] = this.Map[x] || {};
+
+      for(var z = Z-FromZ; z < Z+FromZ; z++) {
+        this.Map[x][z] = this.Map[x][z] || this.AddCell({
+            r: 20,
+            h: 0,
+            x: x,
+            y: 0,
+            z: z,
+          });
+      }
+    }
   }
 
   Generate() {
@@ -70,10 +131,8 @@ export default class NewHorizonScenario {
   }
 
   Light() {
-    const Light = new THREE.PointLight(0xFFFFFF, 1, 1000);
-    Light.position.y = 100;
-    Light.castShadow = true;
-    this.Scene.add(Light);
+    this.HLight = new THREE.HemisphereLight(0x9F9FFA, 0xCCCCCC, 1);
+    this.Scene.add(this.HLight);
   }
 
   // Helpers ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― //
