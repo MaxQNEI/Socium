@@ -13,7 +13,8 @@ import * as SocketActions from './app/socket/actions.js';
 // import NewHorizonScenario from './app/scenarios/0001-new-horizon.js';
 import Scenario from
   // './app/scenarios/0000-initial-scenario.js';
-  './app/scenarios/0001-new-horizon.js';
+  // './app/scenarios/0001-new-horizon.js';
+  './app/scenarios/0002-honeycomb-vertices.js';
 
 const ENABLED = true;
 const DISABLED = false;
@@ -43,7 +44,7 @@ export default class App {
     this.Renderer = new THREE.WebGLRenderer({ antialias: true });
     this.Canvas = this.Renderer.domElement;
     this.Scene = new THREE.Scene;
-    this.Camera = new THREE.PerspectiveCamera(75, this.Aspect(), .1, 1000);
+    this.Camera = new THREE.PerspectiveCamera(75, this.Aspect(), .1, 100000);
 
     this.Scene.AnimationList = [];
     this.Scene.OnRender = [];

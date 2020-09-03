@@ -24,9 +24,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch",
     "express": "nodemon express/index.js",
-    "socket": "nodemon socket/index.js"
+    "socket": "nodemon socket/index.js",
+    "watch": "webpack --watch"
   },
   "keywords": [
     "threejs",
