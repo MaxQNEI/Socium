@@ -40,13 +40,13 @@ export default class HoneycombVerticesScenario {
 
 
 
-    this.Chunk(-2, -1);
-    this.Chunk(-1, 0);
-    this.Chunk(0, 0);
-    this.Chunk(1, 0);
-    this.Chunk(2, 0);
-    this.Chunk(1, 1);
-    this.Chunk(1, 2);
+    this.Chunk(-2, -1, { show: true });
+    this.Chunk(-1, 0, { show: true });
+    this.Chunk(0, 0, { show: true });
+    this.Chunk(1, 0, { show: true });
+    this.Chunk(2, 0, { show: true });
+    this.Chunk(1, 1, { show: true });
+    this.Chunk(1, 2, { show: true });
   }
 
   CameraControls() {
@@ -68,7 +68,7 @@ export default class HoneycombVerticesScenario {
     debug.appendChild(debugCamera);
 
     const AnimatePositionY = {
-      duration: 500,
+      duration: 200,
       use: false,
       start: 0,
       end: 0,
@@ -140,7 +140,13 @@ export default class HoneycombVerticesScenario {
     });
   }
 
-  Chunk(x, z) {
+  Chunk(x, z, params) {
+    const ChunkKey = (x +'x'+ z);
+
+    if(this.Ground.Chunk.List.hasOwnProperty(ChunkKey)) {
+      return this.Ground.Chunk.List[ChunkKey];
+    }
+
     const ChunkColor = (() => {
       const c = Random(100, 200);
       return `rgb(${c}, ${c}, ${c})`;
@@ -149,8 +155,6 @@ export default class HoneycombVerticesScenario {
     const Geometry = new THREE.Geometry();
     const Material = new THREE.MeshBasicMaterial({ color: ChunkColor, vertexColors: THREE.FaceColors, transparent: true, opacity: 1 });
     const Mesh = new THREE.Mesh(Geometry, Material);
-
-    this.Scene.add(Mesh);
 
 
     const hexRadius = this.Hexagone.Radius;
@@ -218,6 +222,24 @@ export default class HoneycombVerticesScenario {
 
       }
     }
+
+    const Chunk = this.Ground.Chunk.List[ChunkKey] = Object.defineProperties({}, {
+      Key: { enumerable: true, value: ChunkKey },
+      Geometry: { enumerable: true, value: Geometry },
+      Material: { enumerable: true, value: Material },
+      Mesh: { enumerable: true, value: Mesh },
+
+      Show: { enumerable: true, value: () => {
+        this.Scene.add(Mesh);
+      } },
+      Hide: { enumerable: true, value: () => {
+        this.Scene.remove(Mesh);
+      } },
+    });
+
+    params.show && Chunk.Show();
+
+    return Chunk;
   }
 
   Cell(x, z) { /* TODO */ }
